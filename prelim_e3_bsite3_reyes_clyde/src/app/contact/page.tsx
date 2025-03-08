@@ -60,13 +60,13 @@ export default function ContactUs() {
         <div className="max-w-6xl mx-auto py-12 px-4">
           <div className="grid md:grid-cols-5 gap-8">
             <div className="md:col-span-2 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-              <h2 className="text-2xl font-bold mb-6 dark:text-white">Get In Touch</h2>
+              <h2 className="text-2xl font-bold mb-6 text-black dark:text-white">Get In Touch</h2>
               
               <div className="space-y-6">
                 <div className="flex items-start">
                   <MapPin className="h-6 w-6 text-blue-500 mr-4 mt-1" />
                   <div>
-                    <h3 className="font-medium dark:text-white">Our Location</h3>
+                    <h3 className="font-medium text-black dark:text-white">Our Location</h3>
                     <p className="text-gray-600 dark:text-gray-300 mt-1">
                       Lyceum Alabang - Main Bldg.<br />
                       Km. 30 National Road<br />
@@ -78,7 +78,7 @@ export default function ContactUs() {
                 <div className="flex items-start">
                   <Phone className="h-6 w-6 text-blue-500 mr-4 mt-1" />
                   <div>
-                    <h3 className="font-medium dark:text-white">Phone</h3>
+                    <h3 className="font-medium text-black dark:text-white">Phone</h3>
                     <p className="text-gray-600 dark:text-gray-300 mt-1">
                       (02) 8856-9323 | 8856-9324
                     </p>
@@ -90,7 +90,7 @@ export default function ContactUs() {
             </div>
             {/* Contact Form */}
             <div className="md:col-span-3 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md space-y-6">
-              <h2 className="text-2xl font-bold mb-6 dark:text-white">Send Us a Message</h2>
+              <h2 className="text-2xl font-bold mb-6 text-black dark:text-white">Send Us a Message</h2>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>

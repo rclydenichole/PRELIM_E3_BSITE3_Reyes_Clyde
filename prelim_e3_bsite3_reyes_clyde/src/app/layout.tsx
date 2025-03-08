@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Clyde Reyes Nichole",
-  description: "Prelim Exam",
+  title: "Lyceum of Alabang",
+  description: "",
 };
 
 export default function RootLayout({

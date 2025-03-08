@@ -1,32 +1,13 @@
 'use client';
-// First, update your Navbar component to include the dark mode toggle
-// components/Navbar.jsx
+
 import Link from 'next/link';
 import { UserCircle, Home, Menu, X, Sun, Moon, Handshake } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTheme } from '@/context/ThemeContext';
 
-interface NavbarProps {
-  siteName?: string;
-}
-
-export default function Navbar({ siteName }: NavbarProps) {
+export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
-  const [localSiteName, setLocalSiteName] = useState("");
-
-  useEffect(() => {
-    if (siteName) {
-      setLocalSiteName(siteName);
-    } else {
-      const savedSiteName = localStorage.getItem("siteName");
-      if (savedSiteName) {
-        setLocalSiteName(savedSiteName);
-      } else {
-        setLocalSiteName("Clyde Nichole Reyes");
-      }
-    }
-  }, [siteName]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -43,7 +24,7 @@ export default function Navbar({ siteName }: NavbarProps) {
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="flex items-center">
               <Home className="h-6 w-6 mr-2" />
-              <span className="font-bold text-xl">{localSiteName}</span>
+              <span className="font-bold text-xl">Lyceum of Alabang</span>
             </Link>
           </div>
 
