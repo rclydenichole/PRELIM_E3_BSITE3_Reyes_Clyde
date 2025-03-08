@@ -1,72 +1,92 @@
 'use client';
-
+// First, update your Navbar component to include the dark mode toggle
+// components/Navbar.jsx
 import Link from 'next/link';
-import { UserCircle, Home, Menu, X, Handshake, Moon, Sun } from 'lucide-react';
+import { UserCircle, Home, Menu, X, Sun, Moon, Handshake } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { useTheme } from '@/context/ThemeContext';
 
-export default function Navbar() {
+interface NavbarProps {
+  siteName?: string;
+}
+
+export default function Navbar({ siteName }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const [localSiteName, setLocalSiteName] = useState("");
 
   useEffect(() => {
-    const storedDarkMode = localStorage.getItem('darkMode');
-    if (storedDarkMode === 'true') {
-        setIsDarkMode(true);
-        document.documentElement.classList.add('dark');
+    if (siteName) {
+      setLocalSiteName(siteName);
+    } else {
+      const savedSiteName = localStorage.getItem("siteName");
+      if (savedSiteName) {
+        setLocalSiteName(savedSiteName);
+      } else {
+        setLocalSiteName("Clyde Nichole Reyes");
+      }
     }
-  }, []);
-    
+  }, [siteName]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    if (!isDarkMode) {
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('darkMode', 'true');
-    } else {
-        document.documentElement.classList.remove('dark');
-        localStorage.setItem('darkMode', 'false');
-    }
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
   return (
-    <nav className="bg-gray-800 text-white shadow-lg">
+    <nav className="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white shadow-lg transition-colors duration-200">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          {/* Logo/Brand */}
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="flex items-center">
               <Home className="h-6 w-6 mr-2" />
-              <span className="font-bold text-xl">Lyceum of Alabang</span>
+              <span className="font-bold text-xl">{localSiteName}</span>
             </Link>
           </div>
 
-          {/* User Actions */}
+        {/* Theme Toggle */}
           <div className="hidden md:flex items-center space-x-2">
-
             <button
-                onClick={toggleDarkMode}
-                className="p-2 rounded-full hover:bg-gray-700 transition"
+              onClick={toggleTheme}
+              className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+              aria-label="Toggle theme"
             >
-                {isDarkMode ? <Sun className="h-6 w-6" /> : <Moon className="h-6 w-6" />}
+              {theme === 'dark' ? (
+                <Sun className="h-6 w-6" />
+              ) : (
+                <Moon className="h-6 w-6" />
+              )}
             </button>
-
-            <Link href="/profile" className="p-2 rounded-full hover:bg-gray-700 transition">
+            
+            {/* Desktop Navigation */}
+            <Link href="/about" className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
               <UserCircle className="h-6 w-6" />
             </Link>
-            <Link href="/settings" className="p-2 rounded-full hover:bg-gray-700 transition">
+            <Link href="/contact" className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
               <Handshake className="h-6 w-6" />
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center">
+            <button
+              onClick={toggleTheme}
+              className="p-2 mr-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? (
+                <Sun className="h-6 w-6" />
+              ) : (
+                <Moon className="h-6 w-6" />
+              )}
+            </button>
+            
             <button 
               onClick={toggleMenu}
-              className="p-2 rounded-md hover:bg-gray-700 focus:outline-none"
+              className="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none"
             >
               {isMenuOpen ? (
                 <X className="h-6 w-6" />
@@ -80,29 +100,21 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'}`}>
-
-            <div className="flex space-x-2 px-3 py-2">
-                <button
-                    onClick={toggleDarkMode}
-                    className="flex p-2 rounded-full hover:bg-gray-700 transition"
-                    >
-                        {isDarkMode ? <Sun className="h-6 w-6" /> : <Moon className="h-6 w-6" />}
-                        <span className="ml-2">Dark Mode</span>
-                </button>
-            </div>   
+        <div className="px-2 pt-2 pb-3 space-y-1">
           <div className="flex space-x-2 px-3 py-2">
-            <Link href="/about" className="flex p-2 rounded-full hover:bg-gray-700 transition">
+            <Link href="/about" className="flex p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition flex items-center">
               <UserCircle className="h-6 w-6" />
               <span className="ml-2">About Us</span>
             </Link>
           </div>
           <div className="flex space-x-2 px-3 py-2">
-            <Link href="/contact" className="flex p-2 rounded-full hover:bg-gray-700 transition">
+            <Link href="/contact" className="flex p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition flex items-center">
               <Handshake className="h-6 w-6" />
               <span className="ml-2">Contact Us</span>
             </Link>
           </div>
         </div>
+      </div>
     </nav>
   );
 }

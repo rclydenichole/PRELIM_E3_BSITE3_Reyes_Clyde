@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { ThemeProvider } from "@/context/ThemeContext";
 import Navbar from "@/components/navbar";
-import { MapPin, Phone, Mail, Send, CheckCircle } from "lucide-react";
+import { MapPin, Phone, Send, CheckCircle } from "lucide-react";
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
@@ -27,12 +27,8 @@ export default function ContactUs() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
-    // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // In a real app, you would send the data to your API here
-    console.log("Form submitted:", formData);
+
     
     setIsLoading(false);
     setIsSubmitted(true);
@@ -43,7 +39,6 @@ export default function ContactUs() {
       message: ""
     });
     
-    // Reset the success message after 5 seconds
     setTimeout(() => {
       setIsSubmitted(false);
     }, 5000);
@@ -53,7 +48,6 @@ export default function ContactUs() {
     <ThemeProvider>
       <Navbar />
       <main className="container mx-auto px-4 py-8">
-        {/* Hero Section */}
         <div className="bg-gradient-to-r from-green-500 to-blue-600 rounded-xl shadow-lg overflow-hidden">
           <div className="max-w-4xl mx-auto py-16 px-6 text-center text-white">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Contact Us</h1>
@@ -65,7 +59,6 @@ export default function ContactUs() {
 
         <div className="max-w-6xl mx-auto py-12 px-4">
           <div className="grid md:grid-cols-5 gap-8">
-            {/* Contact Info */}
             <div className="md:col-span-2 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
               <h2 className="text-2xl font-bold mb-6 dark:text-white">Get In Touch</h2>
               
@@ -75,9 +68,9 @@ export default function ContactUs() {
                   <div>
                     <h3 className="font-medium dark:text-white">Our Location</h3>
                     <p className="text-gray-600 dark:text-gray-300 mt-1">
-                      123 Tech Avenue<br />
-                      San Francisco, CA 94107<br />
-                      United States
+                      Lyceum Alabang - Main Bldg.<br />
+                      Km. 30 National Road<br />
+                      Tunasan, Muntinlupa City
                     </p>
                   </div>
                 </div>
@@ -87,23 +80,7 @@ export default function ContactUs() {
                   <div>
                     <h3 className="font-medium dark:text-white">Phone</h3>
                     <p className="text-gray-600 dark:text-gray-300 mt-1">
-                      +1 (555) 123-4567
-                    </p>
-                    <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
-                      Mon-Fri from 9am to 6pm PST
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start">
-                  <Mail className="h-6 w-6 text-blue-500 mr-4 mt-1" />
-                  <div>
-                    <h3 className="font-medium dark:text-white">Email</h3>
-                    <p className="text-gray-600 dark:text-gray-300 mt-1">
-                      hello@yourcompany.com
-                    </p>
-                    <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
-                      We&apos;ll respond as soon as possible
+                      (02) 8856-9323 | 8856-9324
                     </p>
                   </div>
                 </div>
@@ -112,7 +89,7 @@ export default function ContactUs() {
         </div>
             </div>
             {/* Contact Form */}
-            <div className="md:col-span-3 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+            <div className="md:col-span-3 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md space-y-6">
               <h2 className="text-2xl font-bold mb-6 dark:text-white">Send Us a Message</h2>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
